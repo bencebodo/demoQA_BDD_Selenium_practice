@@ -22,6 +22,9 @@ namespace Demoqa_BDD.Support.Dependencies
                 options.AddArgument("--headless=new");
                 options.AddArgument("--window-size=1920,1080");
                 options.AddArgument("--disable-gpu");
+                options.AddArgument("--no-sandbox"); 
+                options.AddArgument("--disable-dev-shm-usage"); 
+                options.BinaryLocation = "/usr/bin/google-chrome";
                 options.PageLoadStrategy = PageLoadStrategy.None;
                 return new ChromeDriver(options);
             });
