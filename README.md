@@ -1,30 +1,65 @@
-DemoQA UI Test Automation Framework
-This repository contains an advanced, enterprise-grade UI test automation framework designed to test the notoriously challenging and dynamic UI of DemoQA.com.
+# DemoQA - Advanced UI Automation & CI/CD Framework
 
-The project simulates real-world Behavior-Driven Development (BDD) workflows using Reqnroll (the modern successor to SpecFlow) and Selenium WebDriver in C#. It is specifically engineered to handle complex React-based DOM elements, heavy ad-injections, and flaky UI rendering, making it a highly resilient portfolio piece.
+![.NET](https://img.shields.io/badge/.NET-8.0%2B-blue)
+![Selenium](https://img.shields.io/badge/Selenium-WebDriver_4-green)
+![Reqnroll](https://img.shields.io/badge/BDD-Reqnroll-yellow)
+![Jenkins](https://img.shields.io/badge/CI%2FCD-Jenkins_Docker-orange)
 
-Key Features & Architecture
-BDD Approach: Clean and readable Gherkin syntax (.feature files) mapped to strongly typed C# Step Definitions.
+## Overview
+This repository showcases an enterprise-grade UI Automation Framework designed to tackle the complex, dynamic, and often "fragile" elements of [DemoQA.com](https://demoqa.com/). 
 
-Page Object Model (POM): Scalable and maintainable class structure separating UI locators from test logic.
+Testing DemoQA is a significant challenge due to its heavy use of React, aggressive ad injections, and unconventional UI behaviors (frozen pop-ups, overlapping elements). This project serves as a proof-of-concept for building a **highly resilient** automation suite that remains stable even in high-concurrency, **headless Docker environments**.
 
-Dependency Injection (DI): Utilizes Microsoft.Extensions.DependencyInjection for managing WebDriver instances and Page Objects seamlessly across scenarios.
+## Key Technical Challenges Solved
+Unlike standard "tutorial" projects, this framework implements "Senior-level" solutions for real-world automation hurdles:
+* **Headless Resilience:** Configured with specialized Chrome arguments (`--headless=new`, `--no-sandbox`, `--disable-dev-shm-usage`) to ensure 100% stability in Linux Docker containers.
+* **Event Dispatcher Strategy:** Bypassed flaky physical mouse interactions on React components by implementing a custom **JavaScript Event Dispatcher** for complex actions like `double-click` and `context-menu`.
+* **Smart State Management:** Implemented a custom `WaitForPageToLoad` mechanism that monitors `document.readyState` (handling both `complete` and `interactive` states) to eliminate race conditions.
+* **Anti-Ad Logic:** Integrated a DOM-cleaner utility that programmatically removes intrusive advertisements and iframes via JavaScript before test execution to prevent `ElementClickIntercepted` exceptions.
 
-Advanced Resilience: Custom JavaScript executors and custom Wait mechanisms (e.g., overriding physical clicks with DOM events) to bypass overlapping elements and overlapping ads in Headless mode.
+## Architecture
+* **BDD with Reqnroll:** Human-readable Gherkin scenarios mapped to strongly typed C# step definitions.
+* **Page Object Model (POM):** A clean, scalable structure separating locators from business logic.
+* **Dependency Injection (DI):** Uses `Microsoft.Extensions.DependencyInjection` to manage the lifecycle of the `IWebDriver` and Page Objects.
+* **Fluent Assertions:** High-readability validation logic using NUnit.
+* **Centralized Logging:** Integrated **Serilog** for detailed, timestamped console and file logs.
 
-Comprehensive Logging: Integrated Serilog for detailed, timestamped console outputs during test execution.
+## Technology Stack
+* **Language:** C# (.NET 8)
+* **UI Automation:** Selenium WebDriver 4
+* **BDD Framework:** Reqnroll (Successor to SpecFlow)
+* **Test Runner:** NUnit
+* **CI/CD:** Jenkins (Declarative Pipeline)
+* **Infrastructure:** Docker
 
-CI/CD Ready: Fully prepared for pipeline integration. Includes a Jenkinsfile for automated, Headless Chrome execution via Docker, complete with .trx / NUnit XML test reporting.
+## 🔄 CI/CD Pipeline
+The framework includes a fully functional `Jenkinsfile` designed for a Dockerized execution flow:
+1.  **Environment Setup:** Automatically installs Google Chrome and required Linux dependencies inside the .NET SDK container.
+2.  **Build:** Restores NuGet packages and compiles the solution.
+3.  **Headless Execution:** Runs tests in a virtualized environment with optimized memory management.
+4.  **Artifact Management:** Archives NUnit XML test results and console logs for every build.
 
-Tech Stack
-Language: C# (.NET)
+## 🚀 Installation & Execution
 
-UI Automation: Selenium WebDriver
+### Prerequisites
+* [.NET SDK](https://dotnet.microsoft.com/download) (Version 8.0 or higher)
+* Google Chrome (latest version)
 
-BDD Framework: Reqnroll
+### Local Execution (Headed)
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/yourusername/DemoQA-Automation.git](https://github.com/yourusername/DemoQA-Automation.git)
+    cd DemoQA-Automation
+    ```
+2.  **Restore packages:**
+    ```bash
+    dotnet restore
+    ```
+3.  **Run tests:**
+    ```bash
+    dotnet test
+    ```
 
-Test Runner / Assertions: NUnit
+    Author 
 
-Logging: Serilog
-
-CI/CD: Jenkins (Declarative Pipeline)
+    Bence Bodo - Automation QA Engineer
