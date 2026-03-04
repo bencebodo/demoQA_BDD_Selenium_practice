@@ -1,0 +1,14 @@
+﻿{
+  "$schema": "https://schemas.reqnroll.net/reqnroll-config-latest.json",
+  "trace": {
+    "traceSuccessfulSteps": false,
+    "traceTimings": false,
+    "traceError": false,
+    "stepDefinitionSkeletonStyle": "RegexAttribute"
+  },
+  "dependencies": {
+    "plugins": [
+      { "name": "Reqnroll.Microsoft.Extensions.DependencyInjection" }
+    ]
+  }
+}
