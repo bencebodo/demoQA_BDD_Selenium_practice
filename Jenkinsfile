@@ -43,7 +43,7 @@ pipeline {
                 }
 
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                    sh 'dotnet test Demoqa_BDD/Demoqa_BDD.csproj --configuration Release --logger "nunit;LogFileName=TestResult.xml" --results-directory ./TestResults'            
+                    sh 'dotnet test DemoQa.Tests/DemoQa.Tests.csproj --configuration Release --logger "nunit;LogFileName=TestResult.xml" --results-directory ./TestResults'            
                 }
             
                 script {
