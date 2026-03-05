@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="DemoQa.Core/DemoQa.Core.csproj" Id="ea9e7950-1b05-464d-899a-f629c8cc189a" />
+  <Project Path="DemoQa.Tests/DemoQa.Tests.csproj" />
+  <Project Path="DemoQa.Pages/DemoQa.Pages.csproj" DisplayName="DemoQa.Pages" />
+</Solution>
